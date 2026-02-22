@@ -1,0 +1,20 @@
+name: Cache Assignment
+
+on: [push]  # Triggers on any push to any branch
+
+jobs:
+  cache-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: prime-cache-c3385f5
+        id: cache-step
+        uses: actions/cache@v4
+        with:
+          key: cache-c3385f5
+          path: .cache-demo/  # Caches a dummy folder we'll create
+
+      - name: Echo cache result
+        run: echo "Cache result: ${{ steps.cache-step.outputs.cache-hit }}"
