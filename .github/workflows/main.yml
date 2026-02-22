@@ -17,5 +17,13 @@ jobs:
           path: .cache-demo/  # Caches a dummy folder we'll create
 
       - name: Echo cache result
-        run: echo "Cache result: ${{ steps.cache-step.outputs.cache-hit }}"
+        shell: bash
+        run: |
+          echo "Cache hit: ${{ steps.cache-step.outputs.cache-hit }}"
+          if [ "${{ steps.cache-step.outputs.cache-hit }}" == "true" ]; then
+            echo "Cache HIT - restored fast!"
+          else
+            echo "Cache MISS - will save new cache"
+          fi
+
         
